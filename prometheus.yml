@@ -1,0 +1,19 @@
+# # Configure scraping target for your Spring Boot app
+# scrape_configs:
+#   - job_name: 'spring-boot-app'
+#     scrape_interval: 5s  # Metric scraping interval
+#     static_configs:
+#     - targets: ['localhost:8083']  # Adjust port if needed
+
+global:
+  scrape_interval: 2s
+  evaluation_interval: 2s
+ 
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['prometheus:9090']
+  - job_name: 'multi-tenant-service'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['192.168.1.193:8083']
